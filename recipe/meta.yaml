@@ -6,22 +6,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/intake-nested-yaml-catalog-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/intake-nested-yaml-catalog-{{ version }}.tar.gz
   sha256: 29eba085b7d0f8cd9a97afe46d4b6b34d51ed852855fd12ed126fb38e975edc8
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.8
+    - python {{ python_min }}
     - vcver
     - setuptools-parcels
     - pip
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - vcver
     - intake
     - pandas
@@ -35,6 +35,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/zillow/intake-nested-yaml-catalog
